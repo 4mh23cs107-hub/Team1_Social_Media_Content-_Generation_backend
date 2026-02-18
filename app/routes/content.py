@@ -22,8 +22,10 @@ def generate_content(request: content_schemas.ContentGenerate, current_user: Use
     new_content = Content(
         topic=request.topic,
         platform=request.platform,
-        content_type="post",
-        generated_text=ai_output,
+        content_type=ai_output.get("content_type", "post"),
+        generated_text=ai_output.get("caption", ""),
+        hashtags=ai_output.get("hashtags", ""),
+        image_url=ai_output.get("image_url"),
         author_id=current_user.id,
         status="draft"
     )

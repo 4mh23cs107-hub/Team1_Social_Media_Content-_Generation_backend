@@ -21,6 +21,7 @@ class ContentResponse(ContentBase):
     id: int
     generated_text: str
     hashtags: Optional[str]
+    image_url: Optional[str]
     status: str
     author_id: int
     created_at: datetime

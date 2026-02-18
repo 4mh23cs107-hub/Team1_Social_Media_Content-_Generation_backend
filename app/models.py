@@ -35,6 +35,7 @@ class Content(Base):
     content_type = Column(String) # e.g., Post, Story, Thread
     generated_text = Column(Text)
     hashtags = Column(Text)
+    image_url = Column(String, nullable=True)
     status = Column(String, default="draft") # draft, approved, published
     campaign_id = Column(Integer, ForeignKey("team1_campaigns.id"), nullable=True)
     author_id = Column(Integer, ForeignKey("team1_users.id"))
