@@ -10,7 +10,6 @@ router = APIRouter(prefix="/auth", tags=["auth"])
 
 @router.post("/register", response_model=user_schemas.User)
 def register(user: user_schemas.UserCreate, db: Session = Depends(get_db)):
-    print(f"DEBUG: Using table {User.__tablename__}")
     db_user = db.query(User).filter(User.email == user.email).first()
     if db_user:
         raise HTTPException(status_code=400, detail="Email already registered")
