@@ -1,4 +1,6 @@
 import os
+import json
+import requests
 from azure.ai.inference import ChatCompletionsClient
 from azure.ai.inference.models import SystemMessage, UserMessage
 from azure.core.credentials import AzureKeyCredential
@@ -17,8 +19,6 @@ if GITHUB_TOKEN:
         credential=AzureKeyCredential(GITHUB_TOKEN),
     )
 
-import requests
-import json
 
 def generate_image_content(prompt):
     """
