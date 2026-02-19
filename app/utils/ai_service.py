@@ -84,16 +84,10 @@ def generate_social_media_content(topic, platform, tone="professional", audience
             
         output.update(json.loads(content))
     except Exception as e:
-        # Fallback
-        try:
-            content = response.choices[0].message.content
-            if content.startswith("```json"):
-                content = content.replace("```json", "", 1).rsplit("```", 1)[0].strip()
-            elif content.startswith("```"):
-                content = content.replace("```", "", 1).rsplit("```", 1)[0].strip()
-            output.update(json.loads(content))
-        except:
-            output["caption"] = f"Error generating text: {str(e)}"
+        # Fallback if client.complete failed or returned invalid data
+        output["caption"] = f"Error generating content: {str(e)}"
+        output["hashtags"] = ""
+        output["content_type"] = "post"
 
     # Generate Image
     image_prompt = f"A professional social media {output.get('content_type', 'post')} image about {topic}. Style: {tone}. Target Audience: {audience}."

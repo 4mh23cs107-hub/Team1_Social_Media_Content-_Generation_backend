@@ -11,6 +11,9 @@ class User(Base):
     full_name = Column(String)
     is_active = Column(Boolean, default=True)
 
+    linkedin_access_token = Column(String, nullable=True)
+    linkedin_id = Column(String, nullable=True)
+
     campaigns = relationship("Campaign", back_populates="owner")
     contents = relationship("Content", back_populates="author")
 

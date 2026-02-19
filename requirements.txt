@@ -10,3 +10,4 @@ azure-ai-inference
 azure-core
 pydantic[email]
 python-multipart
+requests

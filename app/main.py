@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from .db import engine, Base
 from . import models
-from .routes import auth, content, campaigns
+from .routes import auth, content, campaigns, linkedin
 
 # Create database tables
 Base.metadata.create_all(bind=engine)
@@ -26,6 +26,7 @@ app.add_middleware(
 app.include_router(auth.router)
 app.include_router(content.router)
 app.include_router(campaigns.router)
+app.include_router(linkedin.router)
 
 @app.get("/")
 def root():

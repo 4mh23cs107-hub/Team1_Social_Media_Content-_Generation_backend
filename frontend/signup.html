@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup | SocialAI Manager</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container animate-fade-in">
+        <header>
+            <div class="logo">SocialAI</div>
+        </header>
+
+        <main class="auth-wrapper">
+            <div class="auth-card glass-morphism">
+                <h2>Join SocialAI</h2>
+                <p>Start generating high-impact content</p>
+
+                <form id="signupForm">
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" class="form-input" placeholder="John Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Work Email</label>
+                        <input type="email" id="email" class="form-input" placeholder="name@company.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" class="form-input" placeholder="Min 8 characters" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="signupBtn">
+                        <span>Create Account</span>
+                        <div class="loader hidden" id="signupLoader"></div>
+                    </button>
+                    <div id="signupError" class="auth-footer" style="color: var(--error); margin-top: 1rem;"></div>
+                </form>
+
+                <div class="auth-footer">
+                    Already have an account? <a href="login.html">Sign In</a>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="js/auth.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | SocialAI</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container animate-fade-in">
+        <header>
+            <div class="logo">SocialAI</div>
+            <nav class="nav-links">
+                <span id="userName" style="color: var(--text-secondary)">Loading...</span>
+                <a href="profile.html" class="nav-btn">Profile</a>
+                <span onclick="logout()" class="nav-btn">Logout</span>
+            </nav>
+        </header>
+
+        <main class="dashboard-grid">
+            <!-- Left Side: Generator Form -->
+            <section class="card glass-morphism">
+                <h3 style="margin-bottom: 1.5rem">Content Generator</h3>
+                <form id="generateForm">
+                    <div class="form-group">
+                        <label>Platform</label>
+                        <select id="platform" class="form-input">
+                            <option value="Linkedin">LinkedIn</option>
+                            <option value="Twitter">Twitter / X</option>
+                            <option value="Instagram">Instagram</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Topic</label>
+                        <input type="text" id="topic" class="form-input" placeholder="e.g. Benefits of AI in FinTech"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label>Target Audience</label>
+                        <input type="text" id="audience" class="form-input" placeholder="e.g. Business Professionals"
+                            value="Business Professionals">
+                    </div>
+                    <div class="form-group">
+                        <label>Tone</label>
+                        <select id="tone" class="form-input">
+                            <option value="professional">Professional</option>
+                            <option value="casual">Casual</option>
+                            <option value="inspirational">Inspirational</option>
+                            <option value="witty">Witty</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="generateBtn">
+                        <span>Generate with AI</span>
+                        <div class="loader hidden" id="generateLoader"></div>
+                    </button>
+                </form>
+            </section>
+
+            <!-- Right Side: Preview & Post -->
+            <section class="card glass-morphism" id="previewCard">
+                <h3 style="margin-bottom: 1.5rem">AI Draft Preview</h3>
+                <div id="previewPlaceholder" style="text-align: center; padding: 3rem 0; color: var(--text-secondary)">
+                    Generated content will appear here
+                </div>
+
+                <div id="previewContent" class="hidden">
+                    <div class="content-preview">
+                        <p id="generatedCaption" style="white-space: pre-wrap; margin-bottom: 1rem;"></p>
+                        <p id="generatedHashtags" style="color: var(--primary); font-size: 0.9rem;"></p>
+                    </div>
+
+                    <div id="generatedImageContainer" style="margin-top: 1.5rem; border-radius: 8px; overflow: hidden;"
+                        class="hidden">
+                        <img id="generatedImage" src="" alt="AI Generated" style="width: 100%; display: block;">
+                    </div>
+
+                    <div style="margin-top: 2rem; display: flex; gap: 1rem;">
+                        <button onclick="postToLinkedin()" class="btn btn-primary" style="background: var(--primary)">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="white" style="margin-right: 0.5rem">
+                                <path
+                                    d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.3 3.3 0 0 0-3.3-3.3c-.9 0-1.7.4-2.3 1.1V10h-3v8.5h3v-4.8c0-.3 0-.5.1-.7.2-.5.6-1 1.2-1 1 0 1.2.8 1.2 1.9v4.6h3zM6.5 8.5c1 0 1.8-.8 1.8-1.8s-.8-1.8-1.8-1.8-1.8.8-1.8 1.8.8 1.8 1.8 1.8zM8 18.5V10H5v8.5h3z" />
+                            </svg>
+                            Post to LinkedIn
+                        </button>
+                        <button onclick="saveDraft()" class="btn glass-morphism"
+                            style="width: auto; padding-left: 1.5rem; padding-right: 1.5rem;">Save Draft</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Notification system -->
+    <div id="notification" class="glass-morphism hidden"
+        style="position: fixed; bottom: 2rem; right: 2rem; padding: 1rem 2rem; border-left: 4px solid var(--success); z-index: 1000;">
+        <span id="notificationText">Post successful!</span>
+    </div>
+
+    <script src="js/api.js"></script>
+</body>
+
+</html>

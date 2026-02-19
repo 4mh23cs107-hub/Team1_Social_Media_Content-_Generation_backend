@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile | SocialAI</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container animate-fade-in">
+        <header>
+            <div class="logo" style="cursor: pointer" onclick="window.location.href='dashboard.html'">SocialAI</div>
+            <nav class="nav-links">
+                <a href="dashboard.html" class="nav-btn">Dashboard</a>
+                <span onclick="logout()" class="nav-btn">Logout</span>
+            </nav>
+        </header>
+
+        <main style="max-width: 600px; margin: 0 auto">
+            <section class="card glass-morphism">
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <div
+                        style="width: 100px; height: 100px; background: var(--primary); border-radius: 50%; margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: 800;">
+                        S
+                    </div>
+                    <h2 id="profileName">User Name</h2>
+                    <p id="profileEmail" style="color: var(--text-secondary)">user@example.com</p>
+                </div>
+
+                <div class="form-group">
+                    <label>Connected Accounts</label>
+                    <div id="linkedinStatus" class="glass-morphism"
+                        style="padding: 1rem; display: flex; align-items: center; justify-content: space-between; margin-top: 0.5rem">
+                        <div style="display: flex; align-items: center; gap: 0.75rem">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="#0a66c2">
+                                <path
+                                    d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.3 3.3 0 0 0-3.3-3.3c-.9 0-1.7.4-2.3 1.1V10h-3v8.5h3v-4.8c0-.3 0-.5.1-.7.2-.5.6-1 1.2-1 1 0 1.2.8 1.2 1.9v4.6h3zM6.5 8.5c1 0 1.8-.8 1.8-1.8s-.8-1.8-1.8-1.8-1.8.8-1.8 1.8.8 1.8 1.8 1.8zM8 18.5V10H5v8.5h3z" />
+                            </svg>
+                            <span>LinkedIn Profile</span>
+                        </div>
+                        <div id="linkedinAction">
+                            <button onclick="connectLinkedin()" class="btn btn-primary"
+                                style="width: auto; padding: 0.5rem 1rem; font-size: 0.8rem;">Connect</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem">
+                    <button class="btn glass-morphism"
+                        style="border: 1px solid var(--error); color: var(--error)">Delete Account</button>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="js/api.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const email = localStorage.getItem('userEmail');
+            const token = localStorage.getItem('token');
+            if (email) {
+                document.getElementById('profileEmail').textContent = email;
+                document.getElementById('profileName').textContent = email.split('@')[0].toUpperCase();
+            }
+
+            // Check connection status from backend (we can use the login-url route or a new one)
+            // For now, let's just make sure the UI reflects the real state if we had a dedicated status endpoint
+            // Since we don't have a status endpoint yet, we could check if the user object has linkedin_id
+            try {
+                // We'll assume for now that if they refresh and we want real status, we'd call a 'me' endpoint
+                // But as a quick fix, let's just keep the button until they connect
+            } catch (e) { }
+        });
+    </script>
+</body>
+
+</html>

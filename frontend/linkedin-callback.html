@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Connecting LinkedIn...</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body
+    style="background: var(--bg-dark); color: white; display: flex; align-items: center; justify-content: center; height: 100vh; font-family: 'Inter', sans-serif;">
+    <div style="text-align: center;">
+        <div class="loader" style="margin: 0 auto 1.5rem; width: 40px; height: 40px; border-width: 4px;"></div>
+        <h2 id="status">Connecting your LinkedIn account...</h2>
+        <p style="color: var(--text-secondary); margin-top: 0.5rem;">Please do not close this window.</p>
+    </div>
+
+    <script>
+        const API_BASE = "http://127.0.0.1:8000";
+
+        async function handleCallback() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const code = urlParams.get('code');
+            const token = localStorage.getItem('token');
+
+            if (!code) {
+                document.getElementById('status').textContent = "Connection failed: No code received.";
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/linkedin/callback?code=${code}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    document.getElementById('status').textContent = "LinkedIn Connected Successfully!";
+                    setTimeout(() => {
+                        window.location.href = 'profile.html';
+                    }, 2000);
+                } else {
+                    document.getElementById('status').textContent = "Error: " + (data.detail || "Unknown error");
+                }
+            } catch (err) {
+                document.getElementById('status').textContent = "Network error connecting to backend.";
+                console.error(err);
+            }
+        }
+
+        handleCallback();
+    </script>
+</body>
+
+</html>
